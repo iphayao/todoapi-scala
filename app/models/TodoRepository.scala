@@ -96,8 +96,13 @@ class TodoRepositoryImp @Inject() extends TodoRepository {
 
     override def delete(id: TaskId): Future[Boolean] = {
         Future.successful {
-            taskMap -= id
-            true
+            if(taskMap contains id) {
+                taskMap -= id
+                true
+            }
+            else {
+                false
+            }
         }
     }
 }

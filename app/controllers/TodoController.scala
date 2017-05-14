@@ -67,27 +67,36 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
 
     def getTasks() = TodoAction.async { implicit request => 
         handle.list() map { tasks => 
-            Ok {
-                Json toJson {
-                    tasks map { case (k, v) => createTaskData(k, v) }
+            if(tasks.size > 0)
+                Ok {
+                    Json toJson {
+                            tasks map { case (k, v) => createTaskData(k, v) }
+                    }
                 }
-            }
+            else
+                NoContent
         }
     }
 
     def getTask(id: String) = TodoAction.async { implicit request =>
-        handle.get(TaskId(id)) map { tasks =>
-            Ok {
-                Json toJson {
-                    tasks map { case (k, v) => createTaskData(k, v) }
+        handle.get(TaskId(id)) map { task =>
+            if(task.size > 0)
+                Ok {
+                    Json toJson {
+                        task map { case (k, v) => createTaskData(k, v) }
+                    }
                 }
-            }
+            else
+                NoContent
         }
     }
 
     def deleteTask(id: String) = TodoAction.async { implicit request =>
-        handle.delete(TaskId(id)) map { x =>
-            Ok
+        handle.delete(TaskId(id)) map { result =>
+            if(result)
+                Ok
+            else
+                BadRequest
         } 
     }
 
@@ -112,8 +121,11 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
     }
 
     def modifyTask(id: String, status: String) = TodoAction.async { implicit request => 
-        handle.modify(TaskId(id), TaskStatus.done) map { x =>
-            Ok
+        handle.modify(TaskId(id), TaskStatus.done) map { result =>
+            if(result)
+                Ok
+            else
+                BadRequest
         }
     }
 
