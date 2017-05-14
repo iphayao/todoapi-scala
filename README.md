@@ -37,20 +37,20 @@ sbt run
 ```bash
 
 # Request format
-GET     /api/tasks
+GET      /api/tasks
 
 # Boby request format
 N/A
 
 # Response status
 - Successed
-200     OK
+200      OK
 
 - Failed
-N/A
+402      NoContent
 
 # Example request
-GET     http://localhost:9000/api/tasks
+GET      http://localhost:9000/api/tasks
 
 # Example boby request
 N/A
@@ -79,20 +79,20 @@ N/A
 ```bash
 
 # Request format
-GET     /api/task/{id}
+GET      /api/task/{id}
 
 # Boby request format
 N/A
 
 # Response status
 - Successed
-200     Ok
+200      Ok
 
 - Failed
-N/A
+402      NoContent
 
 # Example request
-GET     http://localhost:9000/api/task/2
+GET      http://localhost:9000/api/task/2
 
 # Example boby request
 N/A
@@ -115,17 +115,18 @@ N/A
 ```bash
 
 # Request format
-POST    /api/task/
+POST     /api/task/
 
 # Boby request format
 JSON 
 
 # Response status
 - Successed
-201     Created
+201      Created
 
 - Failed
-409     Conflict
+409      Conflict
+400      BadRequest
 
 # Example request
 POST    http://localhost:9000/api/task
@@ -148,17 +149,17 @@ N/A
 ```bash
 
 # Request format
-PUT     /api/task/
+PUT      /api/task/
 
 # Boby request format
 JSON 
 
 # Response status
 - Successed
-200     Ok
+200      Ok
 
 - Failed
-400     Bad Request
+400      Bad Request
 
 # Example request
 PUT     http://localhost:9000/api/task
@@ -181,17 +182,17 @@ N/A
 ```bash
 
 # Request format
-PATCH   /api/tasks/{id}/{status}
+PATCH    /api/tasks/{id}/{status}
 
 # Boby request format
 N/A
 
 # Response status
 - Successed
-200     Ok
+200      Ok
 
 - Failed
-400     Bad Request
+400      Bad Request
 
 # Example request
 PATCH    http://localhost:9000/api/task/2/done
@@ -209,20 +210,20 @@ N/A
 ```bash
 
 # Request format
-DELETE  /api/task/{id}
+DELETE   /api/task/{id}
 
 # Boby request format
 N/A
 
 # Response status
 - Successed
-200     Ok
+200      Ok
 
 - Failed
-400     Bad Request
+400      Bad Request
 
 # Example request
-DELETE  http://localhost:9000/api/task/2
+DELETE   http://localhost:9000/api/task/2
 
 # Boby (JSON)
 N/A
