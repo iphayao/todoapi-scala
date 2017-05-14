@@ -84,8 +84,8 @@ class TodoRepositoryImp @Inject() extends TodoRepository {
         Future.successful {
             if(taskMap contains id) {
                 var t = taskMap(id)
-                var yaskItem = TaskItem(t.subject, t.content, status)
-                taskMap(id) = yaskItem
+                var taskItem = TaskItem(t.subject, t.content, status)
+                taskMap(id) = taskItem
                 true
             }
             else {

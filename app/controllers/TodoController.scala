@@ -102,30 +102,52 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
 
     def addTask() = TodoAction.async { implicit request => 
         val t = userForm.bindFromRequest.get
-        handle.create(TaskId(t.id), TaskItem( t.subject, t.content, TaskStatus.pending )) map { result =>
-            if(result) 
-                Created
-             else
-                Conflict 
+        try {
+            handle.create(TaskId(t.id), TaskItem( t.subject, t.content, TaskStatus.withName(t.status))) map { result =>
+                if(result) 
+                    Created
+                else
+                    Conflict 
+            }
         }
+        catch {
+            case ex: Exception => {
+                Future.successful { BadRequest } 
+            }
+        }
+
     }
 
     def editTask() = TodoAction.async { implicit request =>
         val t = userForm.bindFromRequest.get
-        handle.update(TaskId(t.id), TaskItem( t.subject, t.content, TaskStatus.pending )) map { result =>
-            if(result)
-                Ok
-            else
-                BadRequest
+        try {
+            handle.update(TaskId(t.id), TaskItem( t.subject, t.content, TaskStatus.withName(t.status) )) map { result =>
+                if(result)
+                    Ok
+                else
+                    BadRequest
+            }
         }
+        catch {
+            case ex: Exception => {
+                Future.successful { BadRequest }
+            }
+        }    
     }
 
     def modifyTask(id: String, status: String) = TodoAction.async { implicit request => 
-        handle.modify(TaskId(id), TaskStatus.done) map { result =>
-            if(result)
-                Ok
-            else
-                BadRequest
+        try {
+            handle.modify(TaskId(id), TaskStatus.withName(status)) map { result =>
+                if(result)
+                    Ok
+                else
+                    BadRequest
+            }
+        }
+        catch {
+            case ex: Exception => {
+                Future.successful { BadRequest }
+            }
         }
     }
 
