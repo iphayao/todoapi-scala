@@ -1,9 +1,10 @@
-https://travis-ci.org/iphayao/todoapi-scala.svg?branch=master
+# todoapi-scala 
 
-# todoapi-scala
-API assignment
+[<img src="https://img.shields.io/travis/iphayao/todoapi-scala.svg"/>](https://travis-ci.org/iphayao/todoapi-scala)
 
-The todoapi is RESTful API implemented on Play framework with Scala
+API assignment 
+
+The todoapi is RESTful API implemented on Play framework with Scala use memory database *(no database connectoin then all tasks will be gone after webserver stop/restart)*
 
 # Installation Guid
 
@@ -18,6 +19,7 @@ cd todoapi-scala
 sbt run
 
 ```
+> *Play Framework 2.5 build on Java 8*
 
 *by default URL of web server is http://localhost:9000*
 
