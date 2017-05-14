@@ -1,3 +1,5 @@
+https://travis-ci.org/iphayao/todoapi-scala.svg?branch=master
+
 # todoapi-scala
 API assignment
 
