@@ -6,11 +6,11 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 GET     /api/tasks                  controllers.TodoController.getTasks
-GET     /api/task/:id               controllers.TodoController.getTask(id: String)
-DELETE  /api/task/:id               controllers.TodoController.deleteTask(id: String)
-POST    /api/task                   controllers.TodoController.addTask
-PUT     /api/task                   controllers.TodoController.editTask
-PATCH   /api/task/:id/:status       controllers.TodoController.modifyTask(id: String, status: String)
+GET     /api/tasks/:id              controllers.TodoController.getTask(id: String)
+DELETE  /api/tasks/:id              controllers.TodoController.deleteTask(id: String)
+POST    /api/tasks                  controllers.TodoController.addTask
+PUT     /api/tasks                  controllers.TodoController.editTask
+PATCH   /api/tasks/:id/:status      controllers.TodoController.modifyTask(id: String, status: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

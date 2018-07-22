@@ -1,5 +1,0 @@
-[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/Users/Phayao/Development/github/todoapi-scala/conf/application.conf,/Users/Phayao/Development/github/todoapi-scala/target/scala-2.11/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/Phayao/Development/github/todoapi-scala/conf/logback.xml,/Users/Phayao/Development/github/todoapi-scala/target/scala-2.11/classes/logback.xml)[0m
-[0m[[0mdebug[0m] [0m	(/Users/Phayao/Development/github/todoapi-scala/conf/messages,/Users/Phayao/Development/github/todoapi-scala/target/scala-2.11/classes/messages)[0m
-[0m[[0mdebug[0m] [0m	(/Users/Phayao/Development/github/todoapi-scala/conf/routes,/Users/Phayao/Development/github/todoapi-scala/target/scala-2.11/classes/routes)[0m
