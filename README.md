@@ -30,9 +30,9 @@ sbt run
 | Resource                | GET                         | POST                      | PUT                       | PATCH                       | DELETE                      |
 |-------------------------|-----------------------------|---------------------------|---------------------------|-----------------------------|-----------------------------|
 | /api/tasks              | View all items in the list  | N/A                       | N/A                       | N/A                         | N/A                         |
-| /api/task               | N/A                         | Add a task into the list  | Edit existing a task      | N/A                         | N/A                         |
-| /api/task/{id}          | View a task in the list     | N/A                       | N/A                       | N/A                         | Delete a task from the list |
-| /api/task/{id}/{status} | N/A                         | N/A                       | N/A                       | Set a task status           | N/A                         |
+| /api/tasks               | N/A                         | Add a task into the list  | Edit existing a task      | N/A                         | N/A                         |
+| /api/tasks/{id}          | View a task in the list     | N/A                       | N/A                       | N/A                         | Delete a task from the list |
+| /api/tasks/{id}/{status} | N/A                         | N/A                       | N/A                       | Set a task status           | N/A                         |
 |                         |                             |                           |                           |                             |                             |
 
 ## Veiw all items in the list
@@ -83,7 +83,7 @@ N/A
 ```bash
 
 # Request format
-GET      /api/task/{id}
+GET      /api/tasks/{id}
 
 # Boby request format
 N/A
@@ -96,7 +96,7 @@ N/A
 402      NoContent
 
 # Example request
-GET      http://localhost:9000/api/task/2
+GET      http://localhost:9000/api/tasks/2
 
 # Example boby request
 N/A
@@ -119,7 +119,7 @@ N/A
 ```bash
 
 # Request format
-POST     /api/task/
+POST     /api/tasks
 
 # Boby request format
 JSON 
@@ -133,7 +133,7 @@ JSON
 400      BadRequest
 
 # Example request
-POST    http://localhost:9000/api/task
+POST    http://localhost:9000/api/tasks
 
 # Example boby request
 {
@@ -153,7 +153,7 @@ N/A
 ```bash
 
 # Request format
-PUT      /api/task/
+PUT      /api/tasks
 
 # Boby request format
 JSON 
@@ -166,7 +166,7 @@ JSON
 400      Bad Request
 
 # Example request
-PUT     http://localhost:9000/api/task
+PUT     http://localhost:9000/api/tasks
 
 # Example boby request
 {
@@ -199,7 +199,7 @@ N/A
 400      Bad Request
 
 # Example request
-PATCH    http://localhost:9000/api/task/2/done
+PATCH    http://localhost:9000/api/tasks/2/done
 
 # Example boby request
 N/A
@@ -214,7 +214,7 @@ N/A
 ```bash
 
 # Request format
-DELETE   /api/task/{id}
+DELETE   /api/tasks/{id}
 
 # Boby request format
 N/A
@@ -227,7 +227,7 @@ N/A
 400      Bad Request
 
 # Example request
-DELETE   http://localhost:9000/api/task/2
+DELETE   http://localhost:9000/api/tasks/2
 
 # Boby (JSON)
 N/A
