@@ -19,12 +19,16 @@ import models._
  * application's Todo API
  */
 
-object TodoAction extends ActionBuilder[Request] {
-    def invokeBlock[A](request: Request[A], block: (Request[A]) => Future[Result]) = {
-        Logger.info("Calling Action")
-        block(request)
-    }
-}
+//object TodoAction extends ActionBuilder[Request, AnyContent] {
+//    def invokeBlock[A](request: Request[A], block: (Request[A]) => Future[Result]) = {
+//        Logger.info("Calling Action")
+//        block(request)
+//    }
+//
+//    override def parser: BodyParser[AnyContent] = parsers
+//
+//    override protected def executionContext: ExecutionContext = request.executionContext
+//}
 
 case class TaskData(id: String, subject: String, content: String, status: String)
 
@@ -43,7 +47,7 @@ object TaskData {
 }
 
 @Singleton
-class TodoController @Inject()(handle: TodoRepository) extends Controller {
+class TodoController @Inject()(handle: TodoRepository, val controllerComponents: ControllerComponents) extends BaseController {
     /**
      * Create an Action to rander an HTML pages.
      * 
@@ -65,7 +69,7 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
         Ok("Hello -> " + name)
     }
 
-    def getTasks() = TodoAction.async { implicit request => 
+    def getTasks: Action[AnyContent] = Action.async { implicit request =>
         handle.list() map { tasks => 
             if(tasks.size > 0)
                 Ok {
@@ -78,7 +82,7 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
         }
     }
 
-    def getTask(id: String) = TodoAction.async { implicit request =>
+    def getTask(id: String): Action[AnyContent] = Action.async { implicit request =>
         handle.get(TaskId(id)) map { task =>
             if(task.size > 0)
                 Ok {
@@ -91,7 +95,7 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
         }
     }
 
-    def deleteTask(id: String) = TodoAction.async { implicit request =>
+    def deleteTask(id: String): Action[AnyContent] = Action.async { implicit request =>
         handle.delete(TaskId(id)) map { result =>
             if(result)
                 Ok
@@ -100,7 +104,7 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
         } 
     }
 
-    def addTask() = TodoAction.async { implicit request => 
+    def addTask: Action[AnyContent] = Action.async { implicit request =>
         val t = userForm.bindFromRequest.get
         try {
             handle.create(TaskId(t.id), TaskItem( t.subject, t.content, TaskStatus.withName(t.status))) map { result =>
@@ -118,7 +122,7 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
 
     }
 
-    def editTask() = TodoAction.async { implicit request =>
+    def editTask: Action[AnyContent] = Action.async { implicit request =>
         val t = userForm.bindFromRequest.get
         try {
             handle.update(TaskId(t.id), TaskItem( t.subject, t.content, TaskStatus.withName(t.status) )) map { result =>
@@ -135,7 +139,7 @@ class TodoController @Inject()(handle: TodoRepository) extends Controller {
         }    
     }
 
-    def modifyTask(id: String, status: String) = TodoAction.async { implicit request => 
+    def modifyTask(id: String, status: String): Action[AnyContent] = Action.async { implicit request =>
         try {
             handle.modify(TaskId(id), TaskStatus.withName(status)) map { result =>
                 if(result)
